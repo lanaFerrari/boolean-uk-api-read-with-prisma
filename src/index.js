@@ -4,18 +4,23 @@ const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan")
 
+const bookRouter = require("./resources/books/router");
+const petRouter = require("./resources/books/router");
+
 const app = express()
 
 /* SETUP MIDDLEWARE */
 
 app.disable("x-powered-by")
-
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan("dev"))
 
 /* SETUP ROUTES */
+
+app.use("/books", bookRouter)
+app.use("/pets", petRouter)
 
 app.get("*", (req, res) => {
   res.json({ ok: true })
